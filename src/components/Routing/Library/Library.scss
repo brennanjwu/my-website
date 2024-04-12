@@ -1,0 +1,21 @@
+.book-list {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.book {
+    cursor: pointer;
+    margin: 5px 20px;
+    text-align: left;
+    width: 350px;
+}
+.book img{
+    height: 300px;
+    width: auto;
+    text-align: initial;
+}
+.book-page{
+    display: grid;
+    flex-wrap: wrap;
+}
