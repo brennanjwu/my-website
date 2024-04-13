@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.scss'; // Import your CSS file for styling
 import { Link, NavLink } from 'react-router-dom';
+import {motion} from "framer-motion";
 
 const Navbar = ({ items, logoText }) => {
 
   const [prevFlag, setPrevFlag] = useState(null);
   const [activeFlag, setActiveFlag] = useState(3);
-  const [translateY, setTranslateY] = useState(0);
+  const [y, setY] = useState(0);
 
   const handleClick = (flagId) => {
     setPrevFlag(activeFlag);
     setActiveFlag(flagId);
-    if (prevFlag != null) {
+  };
+
+  useEffect(() => {
+    if (prevFlag !== null) {
       const currentFlag = document.getElementById(activeFlag);
       const previousFlag = document.getElementById(prevFlag);
       const rect1 = currentFlag.getBoundingClientRect();
       const rect2 = previousFlag.getBoundingClientRect();
-      const distance = rect2.top - rect1.top;
-      console.log(distance);
-      setTranslateY(distance);
+      const distance =  (rect2.top - rect1.top) * -1;
+      setY(prevValue => {return prevValue + distance});
     }
-  };
+  }, [prevFlag, activeFlag]);
+
+  useEffect(() => {
+    console.log(y);
+  }, [y])
   
   return (
     <div className="nav-bar">
@@ -29,26 +36,22 @@ const Navbar = ({ items, logoText }) => {
       </Link>
       <div className="links">
         <div className="primary-links">
-          <NavLink exact="true" activeClassName="active" className="test" to="/about" onClick={() => handleClick(0)}>
-            <div className="page-flag" id="0"></div>
-            <h2>ABOUT ME</h2>
+          <NavLink exact="true" activeclassname="active" to="/about" onClick={() => handleClick(0)}>
+            <h2 id="0">ABOUT ME</h2>
           </NavLink>
-          <NavLink exact="true" activeClassName="active" className="test" to="/projects" onClick={() => handleClick(1)}>
-            <div className="page-flag" id="1"></div>
-            <h2>PROJECTS</h2>
+          <NavLink exact="true" activeclassname="active" to="/projects" onClick={() => handleClick(1)}>
+            <h2 id="1">PROJECTS</h2>
           </NavLink>
-          <NavLink exact="true" activeClassName="active" className="test" to="/library" onClick={() => handleClick(2)}>
-            <div className="page-flag" id="2" layoutId="page-flag"></div>
-            <h2>LIBRARY</h2>
+          <NavLink exact="true" activeclassname="active" to="/library" onClick={() => handleClick(2)}>
+            <h2 id="2">LIBRARY</h2>
           </NavLink>
         </div>
         <div className="primary-links">
-          <NavLink exact="true" activeClassName="active" className="test" to="/" onClick={() => handleClick(3)}>
-            <div className="page-flag" id="3" layoutId="page-flag"></div>
-            <h2>HOME</h2>
+          <NavLink exact="true" activeclassname="active" className="flex" to="/" onClick={() => handleClick(3)}>
+            <motion.div animate={{y}} transition={{ ease: "easeOut" }} className="flag"></motion.div>
+            <h2 id="3">HOME</h2>
           </NavLink>
         </div>
-        <a>{translateY}</a>
         <div className="secondary-links">
           <a href="https://github.com/brennanjwu" target="_blank" rel="noopener noreferrer">
             <h2>GITHUB</h2>

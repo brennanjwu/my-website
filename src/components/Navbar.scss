@@ -40,30 +40,14 @@
     height: 100%;
 }
 
-.test {
+.flex {
     display: flex;
 }
 
-.active {
-    .page-flag {
-        position: relative;
-        right: 20px;
-        width: 4px;
-        background-color: var(--text-color);
-        //animation-name: slide1;
-        //animation-duration: 1s;
-    }
-    h2 {
-        position: relative;
-        right: 4px;
-    }
+.flag {
+    position: relative;
+    right: 20px;
+    width: 4px;
+    height: 11px;
+    background-color: var(--text-color);
 }
-
-@keyframes slide1 {
-    0% {
-      transform: translateY(500px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }

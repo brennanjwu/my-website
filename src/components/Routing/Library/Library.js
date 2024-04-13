@@ -3,6 +3,7 @@ import books from '../../../books.js';
 import BookTile from '../../BookTile.js';
 import './Library.scss';
 import { v4 as uuidV4 } from 'uuid';
+import {motion} from "framer-motion";
 
 function Library() {
 
