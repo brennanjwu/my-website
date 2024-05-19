@@ -8,6 +8,7 @@ const Navbar = ({ items, logoText }) => {
   const [prevFlag, setPrevFlag] = useState(null);
   const [activeFlag, setActiveFlag] = useState(3);
   const [y, setY] = useState(0);
+  const [windowRatio, setWindowRatio] = useState(1);
 
   const handleClick = (flagId) => {
     setPrevFlag(activeFlag);
@@ -28,6 +29,26 @@ const Navbar = ({ items, logoText }) => {
   useEffect(() => {
     console.log(y);
   }, [y])
+
+  // useEffect(() => {
+  //   console.log(windowRatio);
+  //   if (prevFlag !== null) {
+  //     setY(prevValue => {return prevValue * windowRatio});
+  //   }
+  // }, [windowRatio]);
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     const newWindowHeight = window.innerHeight;
+  //     setWindowRatio(prevValue => {return newWindowHeight / prevValue});
+  //   };
+
+  //   window.addEventListener('resize', handleResize);
+
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
   
   return (
     <div className="nav-bar">
@@ -48,7 +69,7 @@ const Navbar = ({ items, logoText }) => {
         </div>
         <div className="primary-links">
           <NavLink exact="true" activeclassname="active" className="flex" to="/" onClick={() => handleClick(3)}>
-            <motion.div animate={{y}} transition={{ ease: "easeOut" }} className="flag"></motion.div>
+            <motion.div initial="hidden" animate={{y}} transition={{ ease: "easeOut" }} className="flag"></motion.div>
             <h2 id="3">HOME</h2>
           </NavLink>
         </div>
